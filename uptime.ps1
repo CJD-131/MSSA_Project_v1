@@ -7,15 +7,13 @@ $services = $raw_services -split (",")
 while ($true){
 	for ($i = 0; $i -lt $services.Length; $i++){
 		$currentService = $services[$i]
-		ping $currentService > test.txt
-		[string]$response = get-Content test.txt
+		[string]$response = ping $currentService
 		if ($response -match "Destination host unreachable"){
 			write-host "$currentService appears to be down"
 		}
 		else{
 			write-host "$currentService is up"
 		}
-		Remove-Item test.txt
 
 	}	
 }
