@@ -5,7 +5,8 @@ $raw_services = read-host("please enter the IPv4 addresses of services you would
 $services = $raw_services -split (",")
 
 for ($i = 0; $i -lt $services.Length; $i++){
-	ping $services[$i]
+	ping $services[$i] > uptime.txt
+	
 }
 
 
