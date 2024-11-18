@@ -4,9 +4,19 @@ $raw_services = read-host("please enter the IPv4 addresses of services you would
 
 $services = $raw_services -split (",")
 
-for ($i = 0; $i -lt $services.Length; $i++){
-	ping $services[$i] > uptime.txt
-	
-}
+while ($true){
+	for ($i = 0; $i -lt $services.Length; $i++){
+		$currentService = $services[$i]
+		ping $currentService > test.txt
+		[string]$response = get-Content test.txt
+		if ($response -match "Destination host unreachable"){
+			write-host "$currentService appears to be down"
+		}
+		else{
+			write-host "$currentService is up"
+		}
+		Remove-Item test.txt
 
+	}	
+}
 
